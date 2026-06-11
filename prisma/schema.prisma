@@ -1,0 +1,25 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model EncuestaRespuesta {
+  id                   String   @id @default(uuid())
+  fecha_creacion       DateTime @default(now())
+  nombres              String
+  apellidos            String
+  dni                  String
+  correo               String
+  carrera              String
+  ano_graduacion       Int
+  nacionalidad         String
+  estudios_posgrado    Boolean
+  empleado_o_negocio   Boolean
+  campo_estudio        Boolean
+}

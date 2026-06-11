@@ -1,26 +1,99 @@
 @import "tailwindcss";
 
+/* ── USAP Color Palette (Tailwind CSS v4 Theme config) ──── */
+@theme {
+  --color-usap-navy: #0056B3;      /* USAP Royal Blue */
+  --color-usap-navy-dark: #003E80; /* Darker Royal Blue */
+  --color-usap-offwhite: #F8FAFC;  /* Blanco Hueso / Light Tech Gray */
+  --color-usap-dark: #1A1A1A;      /* ASU Matte Black */
+  --color-usap-gray: #64748B;      /* Slate Gray */
+  --color-usap-border: #E2E8F0;    /* Tech Border */
+  
+  /* Fallbacks for custom naming in code */
+  --color-amber-450: #F59E0B;
+  --color-slate-450: #64748B;
+  --color-slate-650: #475569;
+  --color-red-650: #B91C1C;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --usap-navy: #0056B3;
+  --usap-navy-dark: #003E80;
+  --usap-offwhite: #F8FAFC;
+  --usap-dark: #1A1A1A;
+  --usap-gray: #64748B;
+  --usap-border: #E2E8F0;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Reset & Body Styling ─────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--usap-offwhite);
+  color: var(--usap-dark);
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  background-image: 
+    linear-gradient(to right, rgba(0, 86, 179, 0.01) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 86, 179, 0.01) 1px, transparent 1px);
+  background-size: 30px 30px;
+  background-attachment: fixed;
 }
+
+/* ── CSS Animations ───────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInSimple {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fadeIn-d1 {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.06s both;
+}
+
+.animate-fadeIn-d2 {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
+}
+
+.animate-fadeIn-d3 {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
+}
+
+.animate-fadeInSimple {
+  animation: fadeInSimple 0.3s ease-out forwards;
+}
+
+/* ── Minimalist Cards ─────────────────────────────────── */
+.glass-card {
+  background: #FFFFFF;
+  border: 1px solid var(--usap-border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.015);
+}
+
+.bg-grid-pattern {
+  background-size: 30px 30px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 86, 179, 0.015) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 86, 179, 0.015) 1px, transparent 1px);
+}
+
+.border-subtle {
+  border: 1px solid var(--usap-border);
+}
+
+.bg-soft-gray {
+  background-color: #F1F5F9;
+}
+

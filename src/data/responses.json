@@ -1,0 +1,16 @@
+[
+  {
+    "id": "alm-jadzen-1781151271259",
+    "fecha_creacion": "2026-06-11T04:14:31.259Z",
+    "nombres": "Angel Gabriel",
+    "apellidos": "Garcia Calderon",
+    "dni": "0501200703629",
+    "correo": "12620@usap.edu",
+    "carrera": "Ingeniería en Tecnologías Computacionales",
+    "ano_graduacion": 2026,
+    "nacionalidad": "Hondureña",
+    "estudios_posgrado": true,
+    "empleado_o_negocio": true,
+    "campo_estudio": false
+  }
+]
