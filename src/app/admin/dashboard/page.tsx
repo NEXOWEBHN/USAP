@@ -57,6 +57,12 @@ export default function AdminDashboardPage() {
   const [busqueda, setBusqueda] = useState("");
   const [expandedRow, setExpandedRow] = useState<Record<string, boolean>>({});
   const [authChecked, setAuthChecked] = useState(false);
+  const [paginaActual, setPaginaActual] = useState(1);
+
+  // Reset actual page when filters or search change
+  useEffect(() => {
+    setPaginaActual(1);
+  }, [filtroCarrera, busqueda]);
 
   // ── Auth guard ──
   useEffect(() => {
@@ -116,6 +122,13 @@ export default function AdminDashboardPage() {
       item.carrera.toLowerCase().includes(busqueda.toLowerCase());
     return cumpleCarrera && cumpleBusqueda;
   });
+
+  const registrosPorPagina = 10;
+  const totalPaginas = Math.ceil(respuestasFiltradas.length / registrosPorPagina) || 1;
+  const respuestasPaginadas = respuestasFiltradas.slice(
+    (paginaActual - 1) * registrosPorPagina,
+    paginaActual * registrosPorPagina
+  );
 
   const carrerasUnicas = Array.from(new Set(data.map(item => item.carrera))).sort();
 
@@ -480,7 +493,7 @@ export default function AdminDashboardPage() {
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-slate-100 text-xs">
-                        {respuestasFiltradas.map((item) => {
+                        {respuestasPaginadas.map((item) => {
                           const isExpanded = !!expandedRow[item.id];
                           const date = new Date(item.fecha_creacion);
                           const displayDate = date.toLocaleDateString("es-HN") + " " + date.toLocaleTimeString("es-HN", { hour: "2-digit", minute: "2-digit" });
@@ -598,6 +611,32 @@ export default function AdminDashboardPage() {
                     </div>
                   )}
                 </div>
+
+                {/* Controles de Paginación */}
+                {totalPaginas > 1 && (
+                  <div className="flex items-center justify-between pt-4 border-t border-[#E2E8F0] shrink-0 mt-2 text-xs bg-white">
+                    <button
+                      id="btn-prev-page"
+                      onClick={() => setPaginaActual(p => Math.max(p - 1, 1))}
+                      disabled={paginaActual === 1}
+                      className="px-3 py-1.5 border border-[#E2E8F0] bg-white hover:border-slate-300 hover:bg-slate-50 text-slate-500 font-bold rounded-lg transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                    >
+                      Anterior
+                    </button>
+                    <span className="text-[10px] text-slate-450 font-bold uppercase tracking-wider">
+                      Página {paginaActual} de {totalPaginas}
+                    </span>
+                    <button
+                      id="btn-next-page"
+                      onClick={() => setPaginaActual(p => Math.min(p + 1, totalPaginas))}
+                      disabled={paginaActual === totalPaginas}
+                      className="px-3 py-1.5 border border-[#E2E8F0] bg-white hover:border-slate-300 hover:bg-slate-50 text-slate-500 font-bold rounded-lg transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                    >
+                      Siguiente
+                    </button>
+                  </div>
+                )}
+
               </div>
 
             </section>
