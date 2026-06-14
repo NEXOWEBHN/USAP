@@ -13,7 +13,6 @@ export async function GET() {
 
       return {
         'Número': index + 1,
-        'ID Egresado': item.id,
         'Fecha Registro': fechaFormateada,
         'Nombres': item.nombres,
         'Apellidos': item.apellidos,
@@ -34,7 +33,6 @@ export async function GET() {
     // Configurar los anchos de columna óptimos
     const colWidths = [
       { wch: 8 },  // Número
-      { wch: 15 }, // ID Egresado
       { wch: 22 }, // Fecha Registro
       { wch: 20 }, // Nombres
       { wch: 20 }, // Apellidos
