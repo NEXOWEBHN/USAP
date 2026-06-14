@@ -61,7 +61,7 @@ export default function EncuestaPage() {
   const [correo, setCorreo] = useState("");
   const [carrera, setCarrera] = useState("");
   const [anoGraduacion, setAnoGraduacion] = useState("");
-  const [nacionalidad, setNacionalidad] = useState("Hondureña");
+  const [nacionalidad, setNacionalidad] = useState("");
   const [estudiosPosgrado, setEstudiosPosgrado] = useState<boolean | null>(null);
   const [empleadoONegocio, setEmpleadoONegocio] = useState<boolean | null>(null);
   const [campoEstudio, setCampoEstudio] = useState<boolean | null>(null);
@@ -191,11 +191,17 @@ export default function EncuestaPage() {
     setCorreo("");
     setCarrera("");
     setAnoGraduacion("");
-    setNacionalidad("Hondureña");
+    setNacionalidad("");
     setEstudiosPosgrado(null);
     setEmpleadoONegocio(null);
     setCampoEstudio(null);
     setError("");
+  };
+
+  const handleExit = () => {
+    if (typeof window !== "undefined") {
+      window.close();
+    }
   };
 
   const progressPercent = ((step - 1) / 4) * 100;
@@ -310,7 +316,7 @@ export default function EncuestaPage() {
                         placeholder="Ingresa tus nombres"
                         value={nombres}
                         onChange={(e) => setNombres(e.target.value)}
-                        className="w-full px-4 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-xs sm:text-sm text-slate-800 placeholder-slate-400 outline-none focus:border-[#0056B3] focus:ring-4 focus:ring-blue-50/50 transition-all font-semibold"
+                        className="w-full px-4 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-xs sm:text-sm text-slate-800 placeholder:text-slate-400/35 placeholder:text-[10.5px] placeholder:font-normal outline-none focus:border-[#0056B3] focus:ring-4 focus:ring-blue-50/50 transition-all font-semibold"
                       />
                     </div>
 
@@ -322,7 +328,7 @@ export default function EncuestaPage() {
                         placeholder="Ingresa tus apellidos"
                         value={apellidos}
                         onChange={(e) => setApellidos(e.target.value)}
-                        className="w-full px-4 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-xs sm:text-sm text-slate-800 placeholder-slate-400 outline-none focus:border-[#0056B3] focus:ring-4 focus:ring-blue-50/50 transition-all font-semibold"
+                        className="w-full px-4 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-xs sm:text-sm text-slate-800 placeholder:text-slate-400/35 placeholder:text-[10.5px] placeholder:font-normal outline-none focus:border-[#0056B3] focus:ring-4 focus:ring-blue-50/50 transition-all font-semibold"
                       />
                     </div>
 
@@ -334,7 +340,7 @@ export default function EncuestaPage() {
                         placeholder="Ej: 0501199801234"
                         value={dni}
                         onChange={(e) => setDni(e.target.value)}
-                        className="w-full px-4 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-xs sm:text-sm text-slate-800 placeholder-slate-400 outline-none focus:border-[#0056B3] focus:ring-4 focus:ring-blue-50/50 transition-all font-semibold"
+                        className="w-full px-4 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-xs sm:text-sm text-slate-800 placeholder:text-slate-400/35 placeholder:text-[10.5px] placeholder:font-normal outline-none focus:border-[#0056B3] focus:ring-4 focus:ring-blue-50/50 transition-all font-semibold"
                       />
                       <span className="text-[9px] text-slate-400 font-bold block mt-0.5 uppercase tracking-wide">Sin espacios ni guiones</span>
                     </div>
@@ -347,7 +353,7 @@ export default function EncuestaPage() {
                         placeholder="correo@ejemplo.com"
                         value={correo}
                         onChange={(e) => setCorreo(e.target.value)}
-                        className="w-full px-4 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-xs sm:text-sm text-slate-800 placeholder-slate-400 outline-none focus:border-[#0056B3] focus:ring-4 focus:ring-blue-50/50 transition-all font-semibold"
+                        className="w-full px-4 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-xs sm:text-sm text-slate-800 placeholder:text-slate-400/35 placeholder:text-[10.5px] placeholder:font-normal outline-none focus:border-[#0056B3] focus:ring-4 focus:ring-blue-50/50 transition-all font-semibold"
                       />
                     </div>
 
@@ -359,7 +365,7 @@ export default function EncuestaPage() {
                         placeholder="Ej: Hondureña"
                         value={nacionalidad}
                         onChange={(e) => setNacionalidad(e.target.value)}
-                        className="w-full px-4 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-xs sm:text-sm text-slate-800 placeholder-slate-400 outline-none focus:border-[#0056B3] focus:ring-4 focus:ring-blue-50/50 transition-all font-semibold"
+                        className="w-full px-4 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-xs sm:text-sm text-slate-800 placeholder:text-slate-400/35 placeholder:text-[10.5px] placeholder:font-normal outline-none focus:border-[#0056B3] focus:ring-4 focus:ring-blue-50/50 transition-all font-semibold"
                       />
                     </div>
                   </div>
@@ -387,7 +393,11 @@ export default function EncuestaPage() {
                           id="carrera-select"
                           value={carrera}
                           onChange={(e) => setCarrera(e.target.value)}
-                          className="w-full px-4 py-3 bg-white border border-[#E2E8F0] rounded-xl text-xs sm:text-sm text-slate-700 outline-none focus:border-[#0056B3] focus:ring-4 focus:ring-blue-50/50 transition-all font-bold appearance-none cursor-pointer"
+                          className={`w-full px-4 py-3 bg-white border border-[#E2E8F0] rounded-xl text-xs sm:text-sm outline-none focus:border-[#0056B3] focus:ring-4 focus:ring-blue-50/50 transition-all appearance-none cursor-pointer ${
+                            carrera === ""
+                              ? "text-slate-400/35 font-normal text-[10.5px]"
+                              : "text-slate-700 font-bold"
+                          }`}
                         >
                           <option value="">-- Selecciona tu Carrera --</option>
                           {CARRERAS.map((carr, idx) => (
@@ -409,7 +419,7 @@ export default function EncuestaPage() {
                         maxLength={4}
                         value={anoGraduacion}
                         onChange={(e) => setAnoGraduacion(e.target.value)}
-                        className="w-full px-4 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-xs sm:text-sm text-slate-800 placeholder-slate-400 outline-none focus:border-[#0056B3] focus:ring-4 focus:ring-blue-50/50 transition-all font-semibold"
+                        className="w-full px-4 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-xs sm:text-sm text-slate-800 placeholder:text-slate-400/35 placeholder:text-[10.5px] placeholder:font-normal outline-none focus:border-[#0056B3] focus:ring-4 focus:ring-blue-50/50 transition-all font-semibold"
                       />
                       <span className="text-[9px] text-slate-400 font-bold block mt-0.5 uppercase tracking-wide">4 dígitos numéricos</span>
                     </div>
@@ -653,23 +663,15 @@ export default function EncuestaPage() {
                     </p>
                   </div>
 
-                  <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-xs mx-auto">
+                  <div className="pt-4 flex items-center justify-center w-full max-w-xs mx-auto">
                     <button
                       type="button"
-                      id="btn-restart"
-                      onClick={handleReset}
-                      className="w-full sm:w-auto px-6 py-2.5 bg-[#0056B3] hover:bg-[#003E80] text-white text-xs font-bold rounded-xl transition-all shadow-sm hover:shadow-md cursor-pointer flex-1"
+                      id="btn-exit"
+                      onClick={handleExit}
+                      className="w-full px-6 py-2.5 bg-[#0056B3] hover:bg-[#003E80] text-white text-xs font-extrabold rounded-xl transition-all shadow-sm hover:shadow-md cursor-pointer text-center"
                     >
-                      Nuevo Formulario
+                      Salir
                     </button>
-                    <a
-                      href="/"
-                      id="link-home"
-                      className="w-full sm:w-auto px-6 py-2.5 border border-slate-200 text-slate-500 hover:text-[#0056B3] hover:bg-slate-50 text-xs font-bold rounded-xl transition-all flex items-center justify-center space-x-1.5 flex-1"
-                    >
-                      <span>Volver al inicio</span>
-                      <ArrowUpRight className="h-3.5 w-3.5" />
-                    </a>
                   </div>
                 </div>
               )}
