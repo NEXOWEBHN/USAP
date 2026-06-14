@@ -15,7 +15,6 @@ import {
   ChevronUp, 
   FileCheck,
   LogOut,
-  GraduationCap,
   Calendar,
   MapPin,
   Mail,
@@ -132,13 +131,7 @@ export default function AdminDashboardPage() {
         <header className="w-full max-w-7xl mx-auto rounded-xl border border-[#E2E8F0] bg-white px-5 py-3 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-[0_2px_12px_rgba(0,0,0,0.015)]">
           <div className="flex items-center space-x-3.5">
             <a href="/" className="flex items-center group" id="nav-dashboard-logo">
-              <div className="h-9 w-9 bg-[#0056B3] rounded-lg flex items-center justify-center text-white mr-2.5 transition-transform group-hover:scale-105">
-                <GraduationCap className="h-5 w-5 text-amber-400" />
-              </div>
-              <div className="flex flex-col text-left">
-                <span className="text-base font-black tracking-tight text-[#0056B3] leading-none">USAP</span>
-                <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">Universidad de San Pedro Sula</span>
-              </div>
+              <img src="/logo-usap.png" alt="USAP Logo" className="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-[1.02]" />
             </a>
             
             <div className="border-l border-slate-200 pl-4 py-0.5">
@@ -619,8 +612,6 @@ export default function AdminDashboardPage() {
             <span>© {new Date().getFullYear()} Universidad de San Pedro Sula — Todos los derechos reservados.</span>
           </div>
           <div>
-            <span className="text-[#0056B3]">SurveyMetrics Pro</span>
-            <span className="mx-2 text-slate-200">|</span>
             <span>Powered by Arizona State University®</span>
           </div>
         </div>

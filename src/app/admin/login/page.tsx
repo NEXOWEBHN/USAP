@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Shield, Eye, EyeOff, Lock, AlertTriangle, GraduationCap } from "lucide-react";
+import { Shield, Eye, EyeOff, Lock, AlertTriangle } from "lucide-react";
 
 const ADMIN_PIN = "USAP2026";
 
@@ -71,13 +71,7 @@ export default function AdminLoginPage() {
       <div className="w-full px-4 sm:px-6 pt-5 sticky top-0 z-50">
         <header className="w-full max-w-6xl mx-auto rounded-xl border border-[#E2E8F0] bg-white px-5 py-3 flex items-center justify-between shadow-[0_2px_12px_rgba(0,0,0,0.015)]">
           <a href="/" className="flex items-center group" id="nav-login-logo">
-            <div className="h-9 w-9 bg-[#0056B3] rounded-lg flex items-center justify-center text-white mr-2.5 shadow-sm transition-transform group-hover:scale-105">
-              <GraduationCap className="h-5 w-5 text-amber-400" />
-            </div>
-            <div className="flex flex-col text-left">
-              <span className="text-base font-black tracking-tight text-[#0056B3] leading-none">USAP</span>
-              <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">Universidad de San Pedro Sula</span>
-            </div>
+            <img src="/logo-usap.png" alt="USAP Logo" className="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-[1.02]" />
           </a>
           
           <a
@@ -189,8 +183,6 @@ export default function AdminLoginPage() {
             <span>© {new Date().getFullYear()} Universidad de San Pedro Sula — Todos los derechos reservados.</span>
           </div>
           <div>
-            <span className="text-[#0056B3]">SurveyMetrics Pro</span>
-            <span className="mx-2 text-slate-200">|</span>
             <span>Powered by Arizona State University®</span>
           </div>
         </div>
