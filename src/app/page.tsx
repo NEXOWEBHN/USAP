@@ -77,6 +77,8 @@ export default function Home() {
             <div className="space-y-3.5 pt-2">
               <a
                 href="/encuesta"
+                target="_blank"
+                rel="noopener noreferrer"
                 id="hero-cta-primary"
                 className="w-full inline-flex items-center justify-center space-x-2 bg-[#0056B3] hover:bg-[#003E80] text-white text-xs sm:text-sm font-bold py-3 rounded-xl transition-all duration-200 active:scale-[0.98] shadow-sm group cursor-pointer"
               >

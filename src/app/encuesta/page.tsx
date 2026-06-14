@@ -201,6 +201,11 @@ export default function EncuestaPage() {
   const handleExit = () => {
     if (typeof window !== "undefined") {
       window.close();
+      
+      // Fallback: si el navegador bloquea el cierre directo (ej: acceso directo), redirigimos al inicio
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 150);
     }
   };
 
