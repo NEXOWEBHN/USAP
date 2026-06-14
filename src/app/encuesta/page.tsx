@@ -200,12 +200,7 @@ export default function EncuestaPage() {
 
   const handleExit = () => {
     if (typeof window !== "undefined") {
-      window.close();
-      
-      // Fallback: si el navegador bloquea el cierre directo (ej: acceso directo), redirigimos al inicio
-      setTimeout(() => {
-        window.location.href = "/";
-      }, 150);
+      window.location.href = "/";
     }
   };
 
@@ -404,9 +399,11 @@ export default function EncuestaPage() {
                               : "text-slate-700 font-bold"
                           }`}
                         >
-                          <option value="">-- Selecciona tu Carrera --</option>
+                          <option value="" className="text-slate-400 bg-white font-normal">-- Selecciona tu Carrera --</option>
                           {CARRERAS.map((carr, idx) => (
-                            <option key={idx} value={carr}>{carr}</option>
+                            <option key={idx} value={carr} className="text-slate-900 bg-white font-semibold">
+                              {carr}
+                            </option>
                           ))}
                         </select>
                         <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-slate-400">
