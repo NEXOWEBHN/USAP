@@ -105,7 +105,12 @@ export async function GET() {
       }
 
       // Distribución por carrera
-      carreraMap[item.carrera] = (carreraMap[item.carrera] || 0) + 1;
+      if (item.carrera) {
+        const itemCarreras = item.carrera.split(',').map(c => c.trim()).filter(Boolean);
+        itemCarreras.forEach(c => {
+          carreraMap[c] = (carreraMap[c] || 0) + 1;
+        });
+      }
 
       // Distribución por nacionalidad
       nacionalidadMap[item.nacionalidad] = (nacionalidadMap[item.nacionalidad] || 0) + 1;

@@ -13,7 +13,8 @@ import {
   Briefcase,
   ClipboardCheck,
   ShieldCheck,
-  X
+  X,
+  Search
 } from "lucide-react";
 
 // Listado exacto de las carreras del Google Form
@@ -60,7 +61,22 @@ export default function EncuestaPage() {
   const [dni, setDni] = useState("");
   const [correo, setCorreo] = useState("");
   const [carrera, setCarrera] = useState("");
+  const [selectedCarreras, setSelectedCarreras] = useState<string[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
   const [anoGraduacion, setAnoGraduacion] = useState("");
+
+  const updateCarreras = (newCarreras: string[]) => {
+    setSelectedCarreras(newCarreras);
+    setCarrera(newCarreras.join(", "));
+  };
+
+  const handleToggleCarrera = (carr: string) => {
+    const updated = selectedCarreras.includes(carr)
+      ? selectedCarreras.filter(c => c !== carr)
+      : [...selectedCarreras, carr];
+    updateCarreras(updated);
+  };
   const [nacionalidad, setNacionalidad] = useState("");
   const [estudiosPosgrado, setEstudiosPosgrado] = useState<boolean | null>(null);
   const [empleadoONegocio, setEmpleadoONegocio] = useState<boolean | null>(null);
@@ -190,6 +206,7 @@ export default function EncuestaPage() {
     setDni("");
     setCorreo("");
     setCarrera("");
+    setSelectedCarreras([]);
     setAnoGraduacion("");
     setNacionalidad("");
     setEstudiosPosgrado(null);
@@ -387,28 +404,39 @@ export default function EncuestaPage() {
 
                   <div className="space-y-5 pt-2">
                     <div className="space-y-1.5">
-                      <label htmlFor="carrera-select" className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest block">Programa Cursado *</label>
+                      <label htmlFor="carrera-select-trigger" className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest block">Programa(s) Cursado(s) *</label>
                       <div className="relative">
-                        <select
-                          id="carrera-select"
-                          value={carrera}
-                          onChange={(e) => setCarrera(e.target.value)}
-                          className={`w-full px-4 py-3 bg-white border border-[#E2E8F0] rounded-xl text-xs sm:text-sm outline-none focus:border-[#0056B3] focus:ring-4 focus:ring-blue-50/50 transition-all appearance-none cursor-pointer ${
-                            carrera === ""
-                              ? "text-slate-400/35 font-normal text-[10.5px]"
-                              : "text-slate-700 font-bold"
+                        <button
+                          type="button"
+                          id="carrera-select-trigger"
+                          onClick={() => {
+                            setSearchTerm("");
+                            setIsModalOpen(true);
+                          }}
+                          className={`w-full min-h-[48px] px-4 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-left text-xs sm:text-sm outline-none focus:border-[#0056B3] focus:ring-4 focus:ring-blue-50/50 transition-all cursor-pointer flex items-center justify-between gap-2 ${
+                            selectedCarreras.length === 0
+                              ? "text-slate-400/60 font-normal text-[10.5px]"
+                              : "text-slate-750 font-bold"
                           }`}
                         >
-                          <option value="" className="text-slate-400 bg-white font-normal">-- Selecciona tu Carrera --</option>
-                          {CARRERAS.map((carr, idx) => (
-                            <option key={idx} value={carr} className="text-slate-900 bg-white font-semibold">
-                              {carr}
-                            </option>
-                          ))}
-                        </select>
-                        <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-slate-400">
-                          <Building className="h-4 w-4" />
-                        </div>
+                          {selectedCarreras.length === 0 ? (
+                            <span>-- Selecciona tu(s) Carrera(s) --</span>
+                          ) : (
+                            <div className="flex flex-wrap gap-1.5 py-0.5">
+                              {selectedCarreras.map((carr, idx) => (
+                                <span
+                                  key={idx}
+                                  className="inline-flex items-center px-2 py-0.5 rounded-lg text-[10.5px] font-bold bg-blue-50 text-[#0056B3] border border-blue-100/50"
+                                >
+                                  {carr}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+                          <div className="text-slate-450 shrink-0">
+                            <Building className="h-4 w-4" />
+                          </div>
+                        </button>
                       </div>
                     </div>
 
@@ -606,11 +634,22 @@ export default function EncuestaPage() {
 
                     <div className="pb-3 border-b border-slate-200/50 space-y-2.5">
                       <div>
-                        <span className="text-[9px] font-extrabold uppercase tracking-widest text-slate-400 block mb-1">Carrera Académica</span>
-                        <span className="text-slate-700 font-bold flex items-center text-xs">
-                          <Building className="h-4 w-4 mr-2 text-[#0056B3]" />
-                          {carrera}
-                        </span>
+                        <span className="text-[9px] font-extrabold uppercase tracking-widest text-slate-400 block mb-1">Carreras Académicas</span>
+                        <div className="flex flex-col gap-1.5 mt-1">
+                          {selectedCarreras.length > 0 ? (
+                            selectedCarreras.map((carr, idx) => (
+                              <span key={idx} className="inline-flex items-center text-slate-700 font-bold text-xs">
+                                <Building className="h-3.5 w-3.5 mr-2 text-[#0056B3] shrink-0" />
+                                {carr}
+                              </span>
+                            ))
+                          ) : (
+                            <span className="text-slate-700 font-bold flex items-center text-xs">
+                              <Building className="h-4 w-4 mr-2 text-[#0056B3] shrink-0" />
+                              {carrera}
+                            </span>
+                          )}
+                        </div>
                       </div>
                       <div className="grid grid-cols-2 gap-3">
                         <div>
@@ -749,6 +788,137 @@ export default function EncuestaPage() {
           </div>
         </div>
       </footer>
+
+      {/* MODAL DE SELECCIÓN DE CARRERAS */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fadeInSimple">
+          {/* Backdrop */}
+          <div 
+            className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity duration-350"
+            onClick={() => setIsModalOpen(false)}
+          />
+          
+          {/* Modal Container */}
+          <div className="relative bg-white w-full max-w-lg rounded-2xl border border-slate-100 shadow-2xl flex flex-col max-h-[85vh] overflow-hidden animate-scaleIn transform transition-all">
+            {/* Header */}
+            <div className="px-5 py-4 border-b border-slate-100 flex items-center justify-between">
+              <div>
+                <h3 className="text-sm font-extrabold text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
+                  <GraduationCap className="h-4.5 w-4.5 text-[#0056B3]" />
+                  Selección de Carrera(s)
+                </h3>
+                <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wide mt-0.5">
+                  Selecciona una o más carreras cursadas en USAP
+                </p>
+              </div>
+              <button 
+                type="button"
+                onClick={() => setIsModalOpen(false)}
+                className="text-slate-400 hover:text-slate-650 p-1.5 rounded-lg hover:bg-slate-100 transition-colors cursor-pointer"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+
+            {/* Search Box */}
+            <div className="px-5 py-3 border-b border-slate-100 bg-slate-50/50">
+              <div className="relative">
+                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-450" />
+                <input
+                  type="text"
+                  placeholder="Buscar carrera... (ej. Sistemas, Administración, Técnico)"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-9 pr-12 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-xs outline-none focus:border-[#0056B3] focus:ring-4 focus:ring-blue-50/50 transition-all font-semibold text-slate-700"
+                />
+                {searchTerm && (
+                  <button
+                    type="button"
+                    onClick={() => setSearchTerm("")}
+                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#0056B3] font-bold text-[10px] uppercase tracking-wider cursor-pointer"
+                  >
+                    X
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {/* Checkbox List */}
+            <div className="flex-1 overflow-y-auto px-5 py-2 divide-y divide-slate-100 max-h-[350px]">
+              {(() => {
+                const filtered = CARRERAS.filter(c => 
+                  c.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+                
+                if (filtered.length === 0) {
+                  return (
+                    <div className="py-12 text-center text-slate-400">
+                      <p className="font-extrabold text-xs">No se encontraron carreras</p>
+                      <p className="text-[10px] mt-0.5">Prueba buscando con otros términos.</p>
+                    </div>
+                  );
+                }
+
+                return filtered.map((carr, idx) => {
+                  const isChecked = selectedCarreras.includes(carr);
+                  return (
+                    <label 
+                      key={idx}
+                      className="flex items-start gap-3 py-3 px-2.5 hover:bg-slate-50/70 rounded-xl cursor-pointer transition-colors group font-semibold text-slate-700 text-xs sm:text-sm"
+                    >
+                      <div className="relative flex items-center mt-0.5">
+                        <input
+                          type="checkbox"
+                          checked={isChecked}
+                          onChange={() => handleToggleCarrera(carr)}
+                          className="sr-only"
+                        />
+                        <div className={`h-4.5 w-4.5 rounded border flex items-center justify-center transition-all ${
+                          isChecked 
+                            ? "bg-[#0056B3] border-[#0056B3] shadow-sm" 
+                            : "border-slate-300 bg-white group-hover:border-slate-400"
+                        }`}>
+                          {isChecked && <Check className="h-3 w-3 text-white stroke-[3.5]" />}
+                        </div>
+                      </div>
+                      <span className={`text-[11.5px] transition-colors leading-normal select-none ${
+                        isChecked ? "text-slate-800 font-extrabold" : "text-slate-600 font-semibold"
+                      }`}>
+                        {carr}
+                      </span>
+                    </label>
+                  );
+                });
+              })()}
+            </div>
+
+            {/* Footer */}
+            <div className="px-5 py-4 border-t border-slate-100 bg-slate-50/30 flex items-center justify-between gap-3 shrink-0">
+              <div className="text-[10.5px] text-slate-505 font-bold uppercase tracking-wider">
+                {selectedCarreras.length} {selectedCarreras.length === 1 ? "seleccionada" : "seleccionadas"}
+              </div>
+              <div className="flex gap-2">
+                {selectedCarreras.length > 0 && (
+                  <button
+                    type="button"
+                    onClick={() => updateCarreras([])}
+                    className="px-3 py-2 text-[10px] font-black text-slate-400 hover:text-red-500 uppercase tracking-widest transition-colors cursor-pointer"
+                  >
+                    Limpiar Todo
+                  </button>
+                )}
+                <button
+                  type="button"
+                  onClick={() => setIsModalOpen(false)}
+                  className="px-4 py-2 bg-[#0056B3] hover:bg-[#003E80] text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all active:scale-[0.98] shadow-sm cursor-pointer"
+                >
+                  Confirmar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

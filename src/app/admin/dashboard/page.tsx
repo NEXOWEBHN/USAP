@@ -113,7 +113,8 @@ export default function AdminDashboardPage() {
   };
 
   const respuestasFiltradas = data.filter(item => {
-    const cumpleCarrera = filtroCarrera === "todos" || item.carrera === filtroCarrera;
+    const cumpleCarrera = filtroCarrera === "todos" || 
+      (item.carrera && item.carrera.split(',').map(c => c.trim()).filter(Boolean).includes(filtroCarrera));
     const cumpleBusqueda = !busqueda || 
       item.nombres.toLowerCase().includes(busqueda.toLowerCase()) ||
       item.apellidos.toLowerCase().includes(busqueda.toLowerCase()) ||
@@ -130,7 +131,9 @@ export default function AdminDashboardPage() {
     paginaActual * registrosPorPagina
   );
 
-  const carrerasUnicas = Array.from(new Set(data.map(item => item.carrera))).sort();
+  const carrerasUnicas = Array.from(
+    new Set(data.flatMap(item => item.carrera ? item.carrera.split(',').map(c => c.trim()).filter(Boolean) : []))
+  ).sort();
 
   const handleExport = () => {
     window.location.href = "/api/exportar";

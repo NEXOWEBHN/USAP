@@ -38,7 +38,7 @@ export async function GET() {
       { wch: 20 }, // Apellidos
       { wch: 18 }, // DNI
       { wch: 25 }, // Correo Electrónico
-      { wch: 35 }, // Carrera
+      { wch: 48 }, // Carrera
       { wch: 15 }, // Año Graduación
       { wch: 15 }, // Nacionalidad
       { wch: 25 }, // Posgrado
