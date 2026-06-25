@@ -31,7 +31,7 @@ export default function Home() {
           {/* Institution Greeting Badge */}
           <div className="inline-flex items-center space-x-2 bg-blue-50 border border-blue-100 rounded-full px-3.5 py-1.5 shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
             <span className="text-[10px] font-extrabold text-[#0056B3] uppercase tracking-wider">
-              Dirección de Vinculación y Extensión
+              Dirección de Vinculación y Extensión DE LA UNIVERSIDAD DE SAN PEDRO SULA
             </span>
           </div>
 
@@ -51,7 +51,7 @@ export default function Home() {
           {/* Time estimate */}
           <div className="flex items-center space-x-3 p-3 bg-[#FAF9F5] border border-[#E2E8F0] rounded-xl max-w-sm">
             <span className="text-xs font-bold text-slate-700">
-              ⏱️ Completar esta encuesta le tomará aproximadamente <strong className="text-[#0056B3] font-extrabold">5 minutos</strong>.
+              Completar esta encuesta le tomará aproximadamente <strong className="text-[#0056B3] font-extrabold">5 minutos</strong>.
             </span>
           </div>
         </div>
@@ -114,7 +114,7 @@ export default function Home() {
               </a>
 
               <p className="text-[10px] text-slate-400 font-bold text-center leading-normal">
-                📢 Le invitamos a compartir esta encuesta con otros compañeros de su promoción.
+                Le invitamos a compartir esta encuesta con otros compañeros de su promoción.
               </p>
 
               <div className="text-center pt-1">
