@@ -1,11 +1,11 @@
 import React from "react";
-import { ClipboardList, ArrowRight, BookOpen, Briefcase, Award, GraduationCap, CheckCircle2, ShieldCheck, BarChart4 } from "lucide-react";
+import { ArrowRight, BookOpen, Briefcase, Award, GraduationCap } from "lucide-react";
 
 /* ── Metadata ──────────────────────────────────────────────── */
 export const metadata = {
-  title: "USAP | Encuesta de Seguimiento de Egresados",
+  title: "USAP | Encuesta Alumni USAP",
   description:
-    "Plataforma oficial de seguimiento de egresados de la Universidad de San Pedro Sula. Comparte tu experiencia y ayúdanos a mejorar la calidad educativa.",
+    "Encuesta oficial de la Asociación Alumni USAP de la Universidad de San Pedro Sula. Fortaleciendo el vínculo con nuestros graduados.",
 };
 
 /* ── Page ───────────────────────────────────────────────────── */
@@ -28,53 +28,82 @@ export default function Home() {
         {/* Left Side: Branding & Trust */}
         <div className="w-full lg:w-1/2 space-y-6 flex flex-col items-start text-left animate-fadeIn">
           
+          {/* Institution Greeting Badge */}
+          <div className="inline-flex items-center space-x-2 bg-blue-50 border border-blue-100 rounded-full px-3.5 py-1.5 shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
+            <span className="text-[10px] font-extrabold text-[#0056B3] uppercase tracking-wider">
+              Dirección de Vinculación y Extensión
+            </span>
+          </div>
+
           {/* Title */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#1A1A1A] tracking-tight leading-[1.12]">
-            Seguimiento de <br />
+            Encuesta <br />
             <span className="text-[#0056B3]">
-              Egresados USAP
+              USAP-Alumni
             </span>
           </h1>
 
           {/* Description */}
-          <p className="text-slate-500 text-sm sm:text-base leading-relaxed max-w-lg">
-            Tu trayectoria profesional y opiniones son la base de nuestra mejora continua. Comparte tu experiencia en solo <strong className="text-slate-700 font-bold">3 minutos</strong> y ayúdanos a impulsar la calidad académica.
+          <p className="text-slate-500 text-xs sm:text-sm leading-relaxed max-w-lg">
+            Uno de nuestros objetivos institucionales es la creación de la <strong>Asociación Alumni USAP</strong>, con el propósito de fortalecer los vínculos con nuestros graduados, conocer su trayectoria profesional y potenciar su experiencia, logros y vocación para seguir impactando positivamente a nuestra comunidad universitaria.
           </p>
+
+          {/* Time estimate */}
+          <div className="flex items-center space-x-3 p-3 bg-[#FAF9F5] border border-[#E2E8F0] rounded-xl max-w-sm">
+            <span className="text-xs font-bold text-slate-700">
+              ⏱️ Completar esta encuesta le tomará aproximadamente <strong className="text-[#0056B3] font-extrabold">5 minutos</strong>.
+            </span>
+          </div>
         </div>
 
-        {/* Right Side: Step-by-Step Card Flow */}
+        {/* Right Side: Benefits Card */}
         <div className="w-full lg:w-5/12 flex justify-center animate-fadeIn-d1">
-          <div className="w-full max-w-md bg-white border border-[#E2E8F0] rounded-2xl p-6.5 shadow-[0_4px_24px_rgba(0,0,0,0.015)] flex flex-col justify-between space-y-6">
+          <div className="w-full max-w-md bg-white border border-[#E2E8F0] rounded-2xl p-6 shadow-[0_4px_24px_rgba(0,0,0,0.015)] flex flex-col justify-between space-y-5">
             
             <div className="space-y-1.5">
-              <h2 className="text-sm font-extrabold text-[#1A1A1A] uppercase tracking-wider">
-                Estructura del Formulario
+              <h2 className="text-xs font-extrabold text-[#1A1A1A] uppercase tracking-widest">
+                Al formar parte de Alumni USAP, podrá:
               </h2>
-              <p className="text-slate-450 text-[11px] leading-tight">
-                Diseño ágil y rápido de completar en 4 fases secuenciales.
-              </p>
             </div>
 
-            {/* Micro Steps timeline */}
-            <div className="space-y-3">
+            {/* Benefits List */}
+            <div className="space-y-3.5">
               {[
-                { num: "01", title: "Identificación", desc: "Datos de contacto, DNI y correo" },
-                { num: "02", title: "Trayecto Académico", desc: "Programa cursado y año de egreso" },
-                { num: "03", title: "Situación Laboral", desc: "Posgrado, empleo y afinidad actual" },
-                { num: "04", title: "Revisión y Envío", desc: "Confirmación final de respuestas" }
+                { 
+                  icon: <BookOpen className="h-4.5 w-4.5 text-[#0056B3]" />, 
+                  title: "Red de Contactos", 
+                  desc: "Ampliar su red de contactos profesionales" 
+                },
+                { 
+                  icon: <Briefcase className="h-4.5 w-4.5 text-[#0056B3]" />, 
+                  title: "Oportunidades", 
+                  desc: "Acceder a oportunidades laborales y de desarrollo profesional" 
+                },
+                { 
+                  icon: <Award className="h-4.5 w-4.5 text-[#0056B3]" />, 
+                  title: "Participación Activa", 
+                  desc: "Participar en eventos, mentorías y proyectos con impacto social" 
+                },
+                { 
+                  icon: <GraduationCap className="h-4.5 w-4.5 text-[#0056B3]" />, 
+                  title: "Alma Mater", 
+                  desc: "Mantener vivo el vínculo con su alma mater" 
+                }
               ].map((item, index) => (
-                <div key={index} className="flex items-start space-x-3 p-2.5 rounded-lg hover:bg-slate-50 transition-colors">
-                  <span className="text-[10px] font-black text-[#0056B3] bg-blue-50 border border-blue-100 rounded px-1.5 py-0.5 mt-0.5">{item.num}</span>
-                  <div className="flex flex-col text-left">
-                    <span className="text-[11.5px] font-extrabold text-slate-800 leading-none">{item.title}</span>
-                    <span className="text-[9.5px] text-slate-400 font-bold mt-1 leading-none">{item.desc}</span>
+                <div key={index} className="flex items-start space-x-3.5 p-3 rounded-xl hover:bg-slate-50 transition-all border border-transparent hover:border-slate-100">
+                  <div className="p-2 bg-blue-50 border border-blue-100 rounded-lg shrink-0">
+                    {item.icon}
+                  </div>
+                  <div className="flex flex-col text-left justify-center min-h-[40px]">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-[#0056B3]">{item.title}</span>
+                    <span className="text-[11.5px] text-slate-500 font-semibold mt-0.5 leading-snug">{item.desc}</span>
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* CTA Survey Action */}
-            <div className="space-y-3.5 pt-2">
+            {/* Share invitation and CTA */}
+            <div className="space-y-4 pt-1">
               <a
                 href="/encuesta"
                 id="hero-cta-primary"
@@ -84,10 +113,14 @@ export default function Home() {
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </a>
 
-              <div className="text-center">
+              <p className="text-[10px] text-slate-400 font-bold text-center leading-normal">
+                📢 Le invitamos a compartir esta encuesta con otros compañeros de su promoción.
+              </p>
+
+              <div className="text-center pt-1">
                 <a
                   href="/admin/login"
-                  className="text-[10px] text-slate-400 hover:text-[#0056B3] font-bold uppercase tracking-wider transition-colors"
+                  className="text-[9px] text-slate-400 hover:text-[#0056B3] font-bold uppercase tracking-wider transition-colors"
                 >
                   Acceso de Calidad Académica →
                 </a>
